@@ -63,13 +63,14 @@ def organizer():
         # print(entry.path)
 
         if file_path in FILE_FORMATS:
+            # print(FILE_FORMATS[file_path])
             dir_path = Path(f"{downloadFolderPath.downloadPath}\\{FILE_FORMATS[file_path]}")
 
             # FileExistsError exception will be ignored
             dir_path.mkdir(exist_ok=True)
 
             # use move instead of mv for cmd (windows)
-            os.system(f'move \"{entry.path}\" {dir_path}')
+            os.system(f'move \"{entry.path}\" \"{dir_path}\"')
 
 
 # def generate():
