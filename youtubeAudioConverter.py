@@ -36,8 +36,14 @@ def youtubeAudioConverter():
 
         for video in playlist['entries']:
             trackTitle = video['title']
+            # try:
+            #     trackTitle.decode('ascii')
+            # except UnicodeDecodeError:
+            #     continue
             print("trackTitle: ", trackTitle)
-            
+            newTrackTitle = trackTitle = trackTitle.replace('/','_')
+            print('After replacement with _: ' + trackTitle)
+                
             # looping through the trackk title to remove anything from INDICATORS
             # Assuming the title won't contain [()] or ([]) or any of these combinations 
             start = end = -1
@@ -54,7 +60,7 @@ def youtubeAudioConverter():
                         # remove the white space before [ or (, it's kinda a cheat way
                         newTrackTitle = trackTitle[:start-1] + trackTitle[end+1:]
                         break
-                
+            print('!!!newTrackTitle: ', newTrackTitle)
             
             # To songs like artist - song title [lyrics]??
             if '-' in newTrackTitle:
@@ -67,6 +73,7 @@ def youtubeAudioConverter():
                 e.tag.title = title
                 e.rename(title)
                 e.tag.save()
+
 
 
 
