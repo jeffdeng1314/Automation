@@ -29,48 +29,44 @@ def youtubeAudioConverter():
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         
         urls = input(str('Enter YouTube URL: '))
-        
-        # enters nothing to exit the program
-        if urls == '':
-            pass
+        # urls = os.sys.argv[1]
 
-        else:
-            # Could be a playlist or just a single video
-            playlist = ydl.extract_info(f'{urls}',download=True)
+        # Could be a playlist or just a single video
+        playlist = ydl.extract_info(f'{urls}',download=True)
 
-            for video in playlist['entries']:
-                trackTitle = video['title']
-                print("trackTitle: ", trackTitle)
+        for video in playlist['entries']:
+            trackTitle = video['title']
+            print("trackTitle: ", trackTitle)
+            
+            # looping through the trackk title to remove anything from INDICATORS
+            # Assuming the title won't contain [()] or ([]) or any of these combinations 
+            start = end = -1
+            for i in range(len(trackTitle)):
+                if trackTitle[i] in INDICATORS:
+                    start = i
+                    continue
+
+                # Make sure we can detect an indicator first
+                if start >= 0:
+                    if trackTitle[i] == INDICATORS[trackTitle[start]]:
+                        end = i
+
+                        # remove the white space before [ or (, it's kinda a cheat way
+                        newTrackTitle = trackTitle[:start-1] + trackTitle[end+1:]
+                        break
                 
-                # looping through the trackk title to remove anything from INDICATORS
-                # Assuming the title won't contain [()] or ([]) or any of these combinations 
-                start = end = -1
-                for i in range(len(trackTitle)):
-                    if trackTitle[i] in INDICATORS:
-                        start = i
-                        continue
+            
+            # To songs like artist - song title [lyrics]??
+            if '-' in newTrackTitle:
+                artist = newTrackTitle.split('-')[0]
+                title = newTrackTitle.split('-')[1]
 
-                    # Make sure we can detect an indicator first
-                    if start >= 0:
-                        if trackTitle[i] == INDICATORS[trackTitle[start]]:
-                            end = i
-
-                            # remove the white space before [ or (, it's kinda a cheat way
-                            newTrackTitle = trackTitle[:start-1] + trackTitle[end+1:]
-                            break
-                    
-                
-                # To songs like artist - song title [lyrics]??
-                if '-' in newTrackTitle:
-                    artist = newTrackTitle.split('-')[0]
-                    title = newTrackTitle.split('-')[1]
-
-                    loadFile = savePath + "/" + trackTitle + ".mp3"
-                    e = eyed3.load(loadFile)
-                    e.tag.artist = artist
-                    e.tag.title = title
-                    e.rename(title)
-                    e.tag.save()
+                loadFile = savePath + "/" + trackTitle + ".mp3"
+                e = eyed3.load(loadFile)
+                e.tag.artist = artist
+                e.tag.title = title
+                e.rename(title)
+                e.tag.save()
 
 
 
