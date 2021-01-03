@@ -1,3 +1,6 @@
 # Automation
 
 Python Script Automation
+
+
+youtubeAudioConverter needs to be executed inside the YouTube Audio Converter folder since it seems like it needs the .dll files for cmd prompt inputs
