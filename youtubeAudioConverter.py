@@ -36,10 +36,10 @@ def youtubeAudioConverter():
 
         for video in playlist['entries']:
             trackTitle = video['title']
-            # try:
-            #     trackTitle.decode('ascii')
-            # except UnicodeDecodeError:
-            #     continue
+
+            if not trackTitle.isascii():
+                continue
+            
             print("trackTitle: ", trackTitle)
             newTrackTitle = trackTitle = trackTitle.replace('/','_')
             print('After replacement with _: ' + trackTitle)
