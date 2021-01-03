@@ -65,7 +65,9 @@ def youtubeAudioConverter():
             # To songs like artist - song title [lyrics]??
             if '-' in newTrackTitle:
                 artist = newTrackTitle.split('-')[0]
-                title = newTrackTitle.split('-')[1]
+                
+                # [1:] to remove the single white space in the front
+                title = newTrackTitle.split('-')[1][1:]
 
                 loadFile = savePath + "/" + trackTitle + ".mp3"
                 e = eyed3.load(loadFile)
