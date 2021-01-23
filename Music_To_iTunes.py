@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from downloadOrganizer import downloadFolderPath
+from DL_Folder_Organizer import downloadFolderPath
 
 def moveMusicToItunes():
     downloadPath = downloadFolderPath.downloadPath

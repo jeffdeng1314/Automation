@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 import youtube_dl
 import os
-from downloadOrganizer import downloadFolderPath
+from DL_Folder_Organizer import downloadFolderPath
 import eyed3
 
 
