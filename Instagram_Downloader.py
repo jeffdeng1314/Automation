@@ -23,7 +23,7 @@ def instaBot(link):
     srcName = link.split('/')[4]
 
     login = "https://www.instagram.com/"
-    dr = webdriver.Chrome()
+    dr = webdriver.Chrome(executable_path="C:/Python3/chromedriver.exe")
 
 
     # Loggin into Instagram
