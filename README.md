@@ -4,6 +4,7 @@ Python Script Automation
 
 So far, they are only compatible with Windows
 
+* Will make the executables for them asap
 
 ## Notes:
 
