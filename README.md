@@ -11,6 +11,7 @@ So far, they are only compatible with Windows
 - The Instagram_Downloader
   - Able to download pictures/videos from a user's post or stories with a given url
   - You can enter the link for a post or story
+  - You'll need a chromedriver in your C drive
 
 - The Youtube_Audio_Converter
   - Able to convert and download all the YouTube videos into mp3 from a given YouTube playlist
