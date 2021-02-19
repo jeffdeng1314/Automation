@@ -42,7 +42,7 @@ def instaBot(link):
         classNames.nextButton = 'FhutL'
 
     login = "https://www.instagram.com/"
-    dr = webdriver.Chrome(executable_path="C:/Python3/chromedriver.exe")
+    dr = webdriver.Chrome(executable_path="chromedriver.exe")
 
 
     # Loggin into Instagram
