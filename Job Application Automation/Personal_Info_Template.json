@@ -1,0 +1,41 @@
+{
+    "Personal Information": {
+        "First name": "",
+        "Middle name": "",
+        "Last name": "",
+        "Email": "",
+        "Phone": "",
+        "Current company": "",
+        
+        "Location": {
+            "Address": "",
+            "City": "",
+            "State": "",
+            "Postal code": ""
+        }
+    },
+    
+    "Links": {
+        "LinkedIn": "",
+        "Twitter": "",
+        "GitHub": "",
+        "Portfolio": "",
+        "Other website": ""
+    },
+
+    "Equal Employment Info": {
+        "Gender": "",
+        "Race/Ethnicity": "",
+        "Disability": "",
+        "Veteran": ""
+    },
+
+    "Working Status": {
+        "Legal Working Status": "",
+        "Visa Sponsorship": "",
+        "Employed Before": {
+            "Y/N": "",
+            "Date": ""
+        }
+    }
+}
