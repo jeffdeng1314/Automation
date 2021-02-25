@@ -33,6 +33,9 @@ def smartRecruiters(dr):
 def workday(dr):
     print("workday")
 
+def greenhouose(dr):
+    print("greenhouse")
+
 
 def recruitingParser(url):
 
@@ -63,7 +66,8 @@ if __name__ == "__main__":
     recruitingList = {
         "lever.co": lever,
         "smartrecruiters.com": smartRecruiters,
-        "myworkdayjobs.com": workday
+        "myworkdayjobs.com": workday,
+        "greenhouse.io": greenhouose
     }
 
     with open(myFiles.jsonFile) as f:
