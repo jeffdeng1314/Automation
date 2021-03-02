@@ -17,11 +17,14 @@ class myFiles:
     resume = "Resume.pdf"
 
 def lever(dr):
-    WebDriverWait(dr,5).until(lambda d: d.find_element_by_class_name('"application-file-input invisible-resume-upload'))
-    
-    resumeButton = dr.find_element_by_id_name("resume-upload-input")
-    resumeButton.click()
+    # WebDriverWait(dr,5).until(lambda d: d.find_element_by_class_name('application-file-input invisible-resume-upload'))
+    time.sleep(4)
+    resumeButton = dr.find_element_by_id("resume-upload-input")
+    # resumeButton.click()
+    print(os.path.abspath(myFiles.resume))
+    resumeButton.send_keys(os.path.abspath(myFiles.resume))
 
+    time.sleep(10)
 
     print('this is lever')
 
