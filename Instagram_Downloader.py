@@ -12,9 +12,8 @@ import os
 from selenium.webdriver.support.ui import WebDriverWait
 
 class user:
-    username = "NooooooooooU_BallsDeep"
-    password = "123456789BallsDeep420"
-
+    username = "AmIABotTho_NotReally"
+    password = "DogeToTheMoooooooon"
     
     name = os.environ['USERNAME']
     downloadPath = f"C:\\Users\\{name}\\Downloads"
