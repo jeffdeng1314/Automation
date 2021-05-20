@@ -32,6 +32,62 @@ def loggingIn(dr):
     dr.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button').click() 
 
 
+def storyMode(dr,vid_links,img_links,login):
+    while True:
+        s = dr.current_url
+
+        # if we have reached the end of the story and at the home page, that means we're done
+        if s == login:
+            break
+        try:
+            vid = dr.find_elements_by_tag_name('source')
+            vid_detail = vid[0].get_attribute('src')
+            print('vid: ',vid_detail)
+            vid_links.append(vid_detail)
+
+        except:
+            img = dr.find_elements_by_tag_name('img')
+            img_detail = img[0].get_attribute('src')
+            print('img: ',img_detail)
+            img_links.append(img_detail)
+        
+        try:
+            buttons = dr.find_elements_by_class_name(classNames.nextButton)
+            buttons[0].click()
+            WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
+        except:
+            WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
+            print("End of stories")
+            break
+
+def postMode(dr,vid_links, img_links):
+    counter = 0
+    n = 0
+    while True:
+        try:
+            buttons = dr.find_elements_by_class_name(classNames.nextButton)
+            buttons[0].click()
+            WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
+            n+=1
+        except:
+            counter+=1
+            n+=1
+            WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
+            if counter==2:
+                break
+                
+        
+        try:
+            vid = dr.find_elements_by_class_name(classNames.vid)[n-1].find_element_by_tag_name('video').get_attribute('src')
+            vid_links.append(vid)
+
+        except:
+            img = dr.find_elements_by_class_name(classNames.img)[n-1].find_element_by_tag_name('img').get_attribute('src')
+            img_links.append(img)
+
+        print('Photos: ', n)
+
+
 def instaBot(link):
     srcName = link.split('/')[4]
     storeMode = False
@@ -64,65 +120,16 @@ def instaBot(link):
     vid_links = []
     img_links = []
 
-
-    counter = 0
-    n = 0
-
     # In story mode
     if storeMode:
-        while True:
-            s = dr.current_url
-            if s == login:
-                break
-            try:
-                vid = dr.find_elements_by_tag_name('source')
-                vid_detail = vid[0].get_attribute('src')
-                print('vid: ',vid_detail)
-                vid_links.append(vid_detail)
+        storeMode(dr,vid_links,img_links,login)
 
-            except:
-                img = dr.find_elements_by_tag_name('img')
-                img_detail = img[0].get_attribute('src')
-                print('img: ',img_detail)
-                img_links.append(img_detail)
-            
-            try:
-                buttons = dr.find_elements_by_class_name(classNames.nextButton)
-                buttons[0].click()
-                WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
-            except:
-                WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
-                print("End of stories")
-                break
-
-
-    # Not in story mode
+    # In post mode
     else:
-        while True:
-            
-            try:
-                buttons = dr.find_elements_by_class_name(classNames.nextButton)
-                buttons[0].click()
-                WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
-                n+=1
-            except:
-                counter+=1
-                n+=1
-                WebDriverWait(dr,5).until(lambda d: d.find_element_by_id('react-root'))
-                if counter==2:
-                    break
-                    
-            
-            try:
-                vid = dr.find_elements_by_class_name(classNames.vid)[n-1].find_element_by_tag_name('video').get_attribute('src')
-                vid_links.append(vid)
+        postMode(dr,vid_links,img_links)
 
-            except:
-                img = dr.find_elements_by_class_name(classNames.img)[n-1].find_element_by_tag_name('img').get_attribute('src')
-                img_links.append(img)
 
-            print('n: ', n)
-
+    # Retrieves the content to local
     try:   
         for each in range(len(img_links)):
             # This downloads the image
